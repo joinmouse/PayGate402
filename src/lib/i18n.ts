@@ -19,7 +19,7 @@ const t = {
 
   // ── HowItWorks ──
   "how.label": { en: "How it works", zh: "工作原理" },
-  "how.title": { en: "Four steps. Zero friction.", zh: "四个步骤，零摩擦。" },
+  "how.title": { en: "Four steps. Zero friction.", zh: "四个步骤，零配置。" },
   "how.s1.title": { en: "Request API", zh: "请求 API" },
   "how.s1.desc": { en: "Agent sends a standard HTTP request to your endpoint.", zh: "Agent 向你的端点发送标准 HTTP 请求。" },
   "how.s2.title": { en: "Receive 402", zh: "收到 402" },

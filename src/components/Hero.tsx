@@ -26,7 +26,10 @@ export default function Hero() {
             <pre><code>
 <span style={{ color: "var(--code-keyword)" }}>import</span> <span style={{ color: "var(--code-default)" }}>{"{ paymentMiddleware }"}</span> <span style={{ color: "var(--code-keyword)" }}>from</span> <span style={{ color: "var(--code-string)" }}>&apos;@x402/next&apos;</span>{"\n\n"}
 <span style={{ color: "var(--code-keyword)" }}>export default</span> <span style={{ color: "var(--code-fn)" }}>paymentMiddleware</span>{"({\n"}
-{"  "}<span style={{ color: "var(--code-string)" }}>&apos;GET /api/weather&apos;</span>{": { price: "}<span style={{ color: "var(--code-string)" }}>&apos;$0.001&apos;</span>{", network: "}<span style={{ color: "var(--code-string)" }}>&apos;base&apos;</span>{" }\n}"})
+{"  "}<span style={{ color: "var(--code-string)" }}>&apos;GET /api/weather&apos;</span>{": {\n"}
+{"    "}price: <span style={{ color: "var(--code-string)" }}>&apos;$0.001&apos;</span>,{"\n"}
+{"    "}network: <span style={{ color: "var(--code-string)" }}>&apos;base&apos;</span>{"\n"}
+{"  }\n}"})
             </code></pre>
           </div>
         </div>
