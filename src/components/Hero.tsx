@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="pt-32 pb-20 md:pt-44 md:pb-28 px-6">
-      <div className="max-w-3xl mx-auto text-center">
+      <div className="max-w-4xl mx-auto text-center">
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -30,7 +30,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-[15px] md:text-lg text-zinc-400 leading-relaxed max-w-lg mx-auto mb-10"
+          className="text-[15px] md:text-lg text-zinc-400 leading-relaxed max-w-xl mx-auto mb-10"
         >
           Accept USDC micropayments for your APIs on Base.
           No accounts, no KYC — AI agents pay autonomously.
@@ -54,7 +54,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
-          className="max-w-xl mx-auto"
+          className="max-w-2xl mx-auto"
         >
           <div className="code-block">
             <div className="code-header">

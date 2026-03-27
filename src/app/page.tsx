@@ -26,7 +26,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="max-w-lg mx-auto text-center"
+            className="max-w-xl mx-auto text-center"
           >
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Start accepting payments</h2>
             <p className="text-[15px] text-zinc-500 mb-8">Join 200+ projects in the x402 ecosystem.</p>

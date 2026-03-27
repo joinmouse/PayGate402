@@ -16,7 +16,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="fixed top-0 w-full z-50 bg-[#09090b]/80 backdrop-blur-xl border-b border-white/[0.06]">
-      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
         <Link href="/" className="text-sm font-semibold tracking-tight">{SITE.name}</Link>
         <nav className="hidden md:flex items-center gap-1">
           {nav.map(l => (

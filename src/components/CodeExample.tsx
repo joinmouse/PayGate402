@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function CodeExample() {
   return (
     <section className="py-20 md:py-28 px-6 border-t border-white/[0.04]">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-3">Integration</p>
           <h2 className="text-2xl md:text-[2.5rem] font-bold tracking-tight">Server and client</h2>

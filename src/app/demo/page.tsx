@@ -42,7 +42,7 @@ export default function DemoPage() {
     <>
       <Header />
       <main className="pt-28 pb-16 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-3">Demo</p>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Try the 402 flow</h1>
