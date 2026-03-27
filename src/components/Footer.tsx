@@ -3,14 +3,22 @@ import { SITE } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/[0.04] py-10 px-[6%]">
-      <div className="mx-auto max-w-[1400px] flex flex-col md:flex-row items-center justify-between gap-4 text-[0.8125rem] text-zinc-600">
-        <span>{SITE.name}</span>
-        <nav className="flex items-center gap-5">
-          <Link href="/docs" className="hover:text-zinc-300 transition-colors">Docs</Link>
-          <Link href="/demo" className="hover:text-zinc-300 transition-colors">Demo</Link>
-          <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300 transition-colors">GitHub</a>
-          <a href="https://www.x402.org" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300 transition-colors">x402</a>
+    <footer style={{ borderTop: "1px solid #1a1a1d", padding: "40px 0" }}>
+      <div className="container-fluid" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+        <span style={{ fontSize: 13, color: "#555" }}>{SITE.name}</span>
+        <nav style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          {[
+            { label: "Docs", href: "/docs" },
+            { label: "Demo", href: "/demo" },
+            { label: "GitHub", href: SITE.github, external: true },
+            { label: "x402", href: "https://www.x402.org", external: true },
+          ].map(l => (
+            l.external ? (
+              <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: "#555", textDecoration: "none" }}>{l.label}</a>
+            ) : (
+              <Link key={l.label} href={l.href} style={{ fontSize: 13, color: "#555", textDecoration: "none" }}>{l.label}</Link>
+            )
+          ))}
         </nav>
       </div>
     </footer>

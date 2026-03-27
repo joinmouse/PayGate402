@@ -1,5 +1,4 @@
 "use client";
-
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
@@ -21,22 +20,15 @@ export default function Home() {
         <CodeExample />
         <Pricing />
 
-        <section className="py-16 md:py-24 px-[6%] border-t border-white/[0.04]">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mx-auto max-w-[1400px] text-center"
-          >
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Start accepting payments</h2>
-            <p className="text-[15px] text-zinc-500 mb-8">Join 200+ projects in the x402 ecosystem.</p>
-            <div className="flex items-center justify-center gap-3">
-              <Link href="/demo" className="text-sm font-medium bg-white text-black px-6 py-2.5 rounded-lg hover:bg-zinc-200 transition-colors">
-                Try Demo
-              </Link>
-              <a href="https://github.com/joinmouse/PayGate402" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-zinc-300 px-6 py-2.5 rounded-lg border border-white/[0.08] hover:border-white/[0.15] transition-all">
-                GitHub
-              </a>
+        <section style={{ padding: "clamp(48px, 6vh, 80px) 0" }}>
+          <div className="divider" />
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            className="container-fluid" style={{ paddingTop: "clamp(48px, 6vh, 80px)", textAlign: "center" }}>
+            <h2 className="heading-lg" style={{ marginBottom: 12 }}>Ready to monetize your API?</h2>
+            <p className="text-body" style={{ marginBottom: 32 }}>Join 200+ projects in the x402 ecosystem.</p>
+            <div style={{ display: "flex", justifyContent: "center", gap: 12 }}>
+              <Link href="/demo" className="btn-primary">Try Demo</Link>
+              <a href="https://github.com/joinmouse/PayGate402" target="_blank" rel="noopener noreferrer" className="btn-secondary">GitHub</a>
             </div>
           </motion.div>
         </section>

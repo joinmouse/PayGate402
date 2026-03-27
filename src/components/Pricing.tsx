@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -10,66 +9,46 @@ const tiers = [
     cta: "Get Started", href: "/docs", highlight: false,
   },
   {
-    name: "Growth", price: "0.5%", period: "per transaction", desc: "For production APIs and services",
-    features: ["Unlimited requests", "Base Mainnet", "Priority support", "Advanced analytics", "Custom pricing rules", "Webhook notifications"],
+    name: "Growth", price: "0.5%", period: "per tx", desc: "For production APIs",
+    features: ["Unlimited requests", "Base Mainnet", "Priority support", "Advanced analytics", "Custom pricing rules", "Webhooks"],
     cta: "Start Building", href: "/docs", highlight: true,
   },
   {
-    name: "Enterprise", price: "Custom", period: "", desc: "For high-volume API providers",
-    features: ["Volume discounts", "Multi-chain support", "Dedicated facilitator", "SLA guarantee", "White-label SDK", "24/7 support"],
+    name: "Enterprise", price: "Custom", period: "", desc: "High volume providers",
+    features: ["Volume discounts", "Multi-chain", "Dedicated facilitator", "SLA guarantee", "White-label SDK", "24/7 support"],
     cta: "Contact Us", href: "mailto:joinmouse@foxmail.com", highlight: false,
   },
 ];
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-16 md:py-24 px-[6%] border-t border-white/[0.04]">
-      <div className="mx-auto max-w-[1400px]">
-        <div className="text-center mb-16">
-          <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-3">Pricing</p>
-          <h2 className="text-[clamp(1.5rem,3vw,2.75rem)] font-bold tracking-tight mb-3">Simple pricing</h2>
-          <p className="text-[15px] text-zinc-500">Zero protocol fees. Only network gas (&lt; $0.01 on Base).</p>
-        </div>
+    <section id="pricing" style={{ padding: "clamp(48px, 6vh, 80px) 0" }}>
+      <div className="divider" />
+      <div className="container-fluid" style={{ paddingTop: "clamp(48px, 6vh, 80px)" }}>
+        <p className="label" style={{ textAlign: "center", marginBottom: 12 }}>Pricing</p>
+        <h2 className="heading-lg" style={{ textAlign: "center", marginBottom: 8 }}>Simple pricing</h2>
+        <p className="text-body" style={{ textAlign: "center", marginBottom: "clamp(40px, 5vh, 64px)" }}>Zero protocol fees. Only network gas (&lt; $0.01 on Base).</p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
           {tiers.map((t, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className={`rounded-2xl border p-7 transition-colors ${
-                t.highlight
-                  ? "bg-[#111113] border-indigo-500/20"
-                  : "bg-[#111113] border-white/[0.06] hover:border-white/[0.1]"
-              }`}
-            >
-              {t.highlight && <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-indigo-400 block mb-3">Popular</span>}
-              <h3 className="text-base font-semibold mb-1">{t.name}</h3>
-              <div className="flex items-baseline gap-1.5 mb-1">
-                <span className="text-2xl font-bold tracking-tight">{t.price}</span>
-                {t.period && <span className="text-[13px] text-zinc-500">{t.period}</span>}
+            <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
+              className="card" style={t.highlight ? { borderColor: "rgba(99,102,241,0.25)" } : {}}>
+              {t.highlight && <span className="label" style={{ color: "#818cf8", display: "block", marginBottom: 12 }}>Popular</span>}
+              <h3 style={{ fontSize: 16, fontWeight: 600, color: "#fff", marginBottom: 4 }}>{t.name}</h3>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 4 }}>
+                <span style={{ fontSize: 28, fontWeight: 700, color: "#fff", letterSpacing: "-0.02em" }}>{t.price}</span>
+                {t.period && <span className="text-small">{t.period}</span>}
               </div>
-              <p className="text-[13px] text-zinc-500 mb-6">{t.desc}</p>
-
-              <ul className="space-y-2.5 mb-8">
+              <p className="text-small" style={{ marginBottom: 24 }}>{t.desc}</p>
+              <ul style={{ listStyle: "none", padding: 0, marginBottom: 28 }}>
                 {t.features.map((f, j) => (
-                  <li key={j} className="flex items-center gap-2.5 text-[13px] text-zinc-400">
-                    <span className="w-1 h-1 rounded-full bg-zinc-600 shrink-0" />
+                  <li key={j} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13, color: "#999", padding: "5px 0" }}>
+                    <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#444", flexShrink: 0 }} />
                     {f}
                   </li>
                 ))}
               </ul>
-
-              <Link
-                href={t.href}
-                className={`block text-center py-2.5 rounded-lg text-[13px] font-medium transition-colors ${
-                  t.highlight
-                    ? "bg-white text-black hover:bg-zinc-200"
-                    : "bg-white/[0.04] text-zinc-300 hover:bg-white/[0.07] border border-white/[0.06]"
-                }`}
-              >
+              <Link href={t.href} className={t.highlight ? "btn-primary" : "btn-secondary"} style={{ justifyContent: "center", width: "100%" }}>
                 {t.cta}
               </Link>
             </motion.div>

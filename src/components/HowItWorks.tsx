@@ -1,37 +1,28 @@
 "use client";
-
 import { motion } from "framer-motion";
 
 const steps = [
-  { num: "01", title: "Request API", desc: "Agent sends a standard HTTP GET/POST request to your endpoint.", tag: "GET /api/weather" },
-  { num: "02", title: "Receive 402", desc: "Server returns payment requirements — price, token, chain.", tag: "402 + price" },
-  { num: "03", title: "Sign USDC", desc: "Agent signs a gasless USDC transfer using EIP-3009.", tag: "X-Payment: 0x..." },
-  { num: "04", title: "Get Data", desc: "Payment settles on-chain via facilitator. Data returned.", tag: "200 OK + JSON" },
+  { num: "01", title: "Request API", desc: "Agent sends a standard HTTP request to your endpoint.", tag: "GET /api/weather" },
+  { num: "02", title: "Receive 402", desc: "Server returns price, token, chain in the response header.", tag: "402 Payment Required" },
+  { num: "03", title: "Sign USDC", desc: "Agent signs a gasless USDC transfer via EIP-3009 and retries.", tag: "X-Payment: 0x..." },
+  { num: "04", title: "Get Data", desc: "Payment settles on-chain via facilitator. Server returns data.", tag: "200 OK" },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-16 md:py-24 px-[6%] border-t border-white/[0.04]">
-      <div className="mx-auto max-w-[1400px]">
-        <div className="text-center mb-16">
-          <p className="text-[0.6875rem] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-3">How it works</p>
-          <h2 className="text-[clamp(1.5rem,3vw,2.75rem)] font-bold tracking-tight">Four steps, zero friction</h2>
-        </div>
+    <section id="how-it-works" style={{ padding: "clamp(48px, 6vh, 80px) 0" }}>
+      <div className="divider" />
+      <div className="container-fluid" style={{ paddingTop: "clamp(48px, 6vh, 80px)" }}>
+        <p className="label" style={{ textAlign: "center", marginBottom: 12 }}>How it works</p>
+        <h2 className="heading-lg" style={{ textAlign: "center", marginBottom: "clamp(40px, 5vh, 64px)" }}>Four steps. Zero friction.</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
           {steps.map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className="bg-[#111113] border border-white/[0.06] rounded-2xl p-5 md:p-6 hover:border-white/[0.1] transition-colors"
-            >
-              <span className="text-[0.6875rem] font-mono text-zinc-600 block mb-5">{s.num}</span>
-              <h3 className="text-[0.9375rem] font-semibold mb-2">{s.title}</h3>
-              <p className="text-[0.8125rem] text-zinc-500 leading-relaxed mb-5">{s.desc}</p>
-              <span className="text-[0.6875rem] font-mono text-indigo-400/70 bg-indigo-500/[0.06] border border-indigo-500/[0.1] px-2.5 py-1 rounded-md">{s.tag}</span>
+            <motion.div key={i} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className="card">
+              <span className="label" style={{ display: "block", marginBottom: 16 }}>{s.num}</span>
+              <h3 className="heading-md" style={{ marginBottom: 8 }}>{s.title}</h3>
+              <p className="text-small" style={{ marginBottom: 16 }}>{s.desc}</p>
+              <span style={{ display: "inline-block", fontSize: 11, fontFamily: "monospace", color: "#6366f1", background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.15)", padding: "4px 10px", borderRadius: 6 }}>{s.tag}</span>
             </motion.div>
           ))}
         </div>

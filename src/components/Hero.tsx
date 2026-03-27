@@ -1,87 +1,40 @@
 "use client";
-
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="pt-28 md:pt-40 pb-16 md:pb-24 px-[6%]">
-      <div className="mx-auto max-w-[1400px]">
-        <div className="max-w-2xl mx-auto text-center">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-[0.6875rem] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-6"
-          >
-            Built on the x402 protocol
-          </motion.p>
+    <section style={{ paddingTop: "clamp(120px, 15vh, 180px)", paddingBottom: "clamp(60px, 8vh, 100px)" }}>
+      <div className="container-fluid" style={{ textAlign: "center" }}>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="label" style={{ marginBottom: 20 }}>
+          Built on the x402 open protocol
+        </motion.p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 }}
-            className="text-[clamp(2.25rem,5vw,4.5rem)] font-bold tracking-[-0.04em] leading-[1.08] mb-6"
-          >
-            Pay any API{" "}
-            <span className="gradient-text">with one line of code</span>
-          </motion.h1>
+        <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="heading-xl" style={{ marginBottom: 20, maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
+          Pay any API with crypto.{" "}
+          <span className="gradient-text">One line of code.</span>
+        </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-[0.9375rem] md:text-lg text-zinc-400 leading-relaxed mb-10"
-          >
-            Accept USDC micropayments for your APIs on Base.
-            No accounts, no KYC — AI agents pay autonomously.
-          </motion.p>
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-body" style={{ maxWidth: 480, margin: "0 auto 36px", fontSize: "1.0625rem" }}>
+          Accept USDC micropayments for your APIs on Base. No accounts, no KYC — AI agents pay autonomously.
+        </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="flex items-center justify-center gap-3"
-          >
-            <Link href="/demo" className="text-sm font-medium bg-white text-black px-6 py-2.5 rounded-lg hover:bg-zinc-200 transition-colors">
-              Try Demo
-            </Link>
-            <Link href="/docs" className="text-sm font-medium text-zinc-300 px-6 py-2.5 rounded-lg border border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all">
-              Documentation
-            </Link>
-          </motion.div>
-        </div>
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: "clamp(48px, 6vh, 80px)" }}>
+          <Link href="/demo" className="btn-primary">Try Demo</Link>
+          <Link href="/docs" className="btn-secondary">Documentation</Link>
+        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="max-w-3xl mx-auto mt-16"
-        >
+        <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} style={{ maxWidth: 680, margin: "0 auto" }}>
           <div className="code-block">
             <div className="code-header">
-              <div className="dots">
-                <span className="bg-[#ff5f57]" />
-                <span className="bg-[#febc2e]" />
-                <span className="bg-[#28c840]" />
-              </div>
-              <span className="text-[11px] text-zinc-600 ml-2">middleware.ts</span>
+              <div className="code-dots"><span style={{ background: "#ff5f57" }} /><span style={{ background: "#febc2e" }} /><span style={{ background: "#28c840" }} /></div>
+              <span style={{ fontSize: 11, color: "#555", marginLeft: 8, fontFamily: "monospace" }}>middleware.ts</span>
             </div>
-            <pre>
-              <code>
-                <span className="text-purple-400">import</span>{" "}
-                <span className="text-zinc-300">{"{ paymentMiddleware }"}</span>{" "}
-                <span className="text-purple-400">from</span>{" "}
-                <span className="text-emerald-400">&apos;@x402/next&apos;</span>
-                {"\n\n"}
-                <span className="text-purple-400">export default</span>{" "}
-                <span className="text-cyan-300">paymentMiddleware</span>
-                {"({\n"}
-                {"  "}<span className="text-emerald-400">&apos;GET /api/weather&apos;</span>{": { "}
-                price: <span className="text-emerald-400">&apos;$0.001&apos;</span>,
-                {" "}network: <span className="text-emerald-400">&apos;base&apos;</span>
-                {" }\n}"})
-              </code>
-            </pre>
+            <pre><code>
+<span style={{ color: "#c084fc" }}>import</span> <span style={{ color: "#d4d4d8" }}>{"{ paymentMiddleware }"}</span> <span style={{ color: "#c084fc" }}>from</span> <span style={{ color: "#34d399" }}>&apos;@x402/next&apos;</span>{"\n\n"}
+<span style={{ color: "#c084fc" }}>export default</span> <span style={{ color: "#67e8f9" }}>paymentMiddleware</span>{"({\n"}
+{"  "}<span style={{ color: "#34d399" }}>&apos;GET /api/weather&apos;</span>{": { price: "}<span style={{ color: "#34d399" }}>&apos;$0.001&apos;</span>{", network: "}<span style={{ color: "#34d399" }}>&apos;base&apos;</span>{" }\n}"})
+            </code></pre>
           </div>
         </motion.div>
       </div>

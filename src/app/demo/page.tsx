@@ -1,5 +1,4 @@
 "use client";
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useState } from "react";
@@ -12,125 +11,95 @@ export default function DemoPage() {
   const [result, setResult] = useState<ApiResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [pay, setPay] = useState(false);
-
   const api = DEMO_APIS[selected];
 
   const send = async () => {
-    setLoading(true);
-    setResult(null);
+    setLoading(true); setResult(null);
     try {
       const h: HeadersInit = {};
       if (pay) h["x-payment"] = "demo-signature";
-
       const opts: RequestInit = { headers: h };
       if (api.method === "POST") {
-        opts.method = "POST";
-        h["Content-Type"] = "application/json";
+        opts.method = "POST"; h["Content-Type"] = "application/json";
         opts.body = JSON.stringify({ text: "AI agents can now autonomously write code, test applications, deploy services, and pay for API access using cryptocurrency." });
       }
-
       const res = await fetch(api.endpoint, opts);
       setResult({ status: res.status, statusText: res.statusText, body: await res.json() });
-    } catch (e) {
-      setResult({ status: 500, statusText: "Error", body: { error: String(e) } });
-    } finally {
-      setLoading(false);
-    }
+    } catch (e) { setResult({ status: 500, statusText: "Error", body: { error: String(e) } }); }
+    finally { setLoading(false); }
   };
 
   return (
     <>
       <Header />
-      <main className="pt-28 pb-16 px-[6%]">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="text-center mb-14">
-            <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-3">Demo</p>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Try the 402 flow</h1>
-            <p className="text-[15px] text-zinc-500">Toggle payment to compare 402 vs 200 responses.</p>
+      <main style={{ paddingTop: 100, paddingBottom: 60 }}>
+        <div className="container-fluid">
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <p className="label" style={{ marginBottom: 12 }}>Demo</p>
+            <h1 className="heading-lg" style={{ marginBottom: 8 }}>Try the 402 flow</h1>
+            <p className="text-body">Toggle payment to compare 402 vs 200 responses.</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))", gap: 20 }}>
             {/* Controls */}
-            <div className="lg:col-span-2 space-y-4">
-              <div className="rounded-2xl border border-white/[0.06] overflow-hidden">
-                <div className="px-5 py-3 border-b border-white/[0.06]">
-                  <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500">Endpoint</span>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <div className="card" style={{ padding: 0, overflow: "hidden" }}>
+                <div style={{ padding: "14px 20px", borderBottom: "1px solid #1e1e21" }}>
+                  <span className="label">Endpoint</span>
                 </div>
                 {DEMO_APIS.map((a, i) => (
-                  <button
-                    key={i}
-                    onClick={() => { setSelected(i); setResult(null); }}
-                    className={`w-full text-left px-5 py-3.5 border-b border-white/[0.04] last:border-0 transition-colors ${
-                      selected === i ? "bg-white/[0.03]" : "hover:bg-white/[0.02]"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-[13px] font-medium">{a.name}</span>
-                      <span className={`text-[11px] font-mono ${a.price === "Free" ? "text-emerald-500" : "text-amber-400"}`}>{a.price}</span>
+                  <button key={i} onClick={() => { setSelected(i); setResult(null); }}
+                    style={{ display: "block", width: "100%", textAlign: "left", padding: "14px 20px", background: selected === i ? "rgba(255,255,255,0.02)" : "transparent", border: "none", borderBottom: "1px solid #1a1a1d", color: "#ededed", cursor: "pointer", transition: "background 0.15s" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 2 }}>
+                      <span style={{ fontSize: 13, fontWeight: 500 }}>{a.name}</span>
+                      <span style={{ fontSize: 11, fontFamily: "monospace", color: a.price === "Free" ? "#34d399" : "#eab308" }}>{a.price}</span>
                     </div>
-                    <span className="text-[11px] font-mono text-zinc-600">{a.method} {a.endpoint}</span>
+                    <span style={{ fontSize: 11, fontFamily: "monospace", color: "#555" }}>{a.method} {a.endpoint}</span>
                   </button>
                 ))}
               </div>
 
               {api.price !== "Free" && (
-                <button
-                  onClick={() => { setPay(!pay); setResult(null); }}
-                  className="w-full flex items-center justify-between px-5 py-3.5 rounded-2xl border border-white/[0.06] hover:bg-white/[0.02] transition-colors"
-                >
-                  <span className="text-[13px]">
-                    {pay ? <span className="text-emerald-400">Payment attached</span> : <span className="text-zinc-500">No payment</span>}
-                  </span>
-                  <div className={`w-9 h-5 rounded-full relative transition-colors ${pay ? "bg-indigo-600" : "bg-zinc-700"}`}>
-                    <div className={`w-3.5 h-3.5 bg-white rounded-full absolute top-[3px] transition-all ${pay ? "left-[18px]" : "left-[3px]"}`} />
+                <button onClick={() => { setPay(!pay); setResult(null); }} className="card"
+                  style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", border: "1px solid #1e1e21", background: "#141415" }}>
+                  <span style={{ fontSize: 13, color: pay ? "#34d399" : "#666" }}>{pay ? "Payment attached" : "No payment (expect 402)"}</span>
+                  <div style={{ width: 36, height: 20, borderRadius: 10, background: pay ? "#6366f1" : "#333", position: "relative", transition: "background 0.15s" }}>
+                    <div style={{ width: 14, height: 14, borderRadius: "50%", background: "#fff", position: "absolute", top: 3, left: pay ? 19 : 3, transition: "left 0.15s" }} />
                   </div>
                 </button>
               )}
 
-              <button
-                onClick={send}
-                disabled={loading}
-                className="w-full text-sm font-medium bg-white text-black py-3 rounded-xl hover:bg-zinc-200 disabled:opacity-40 transition-colors"
-              >
+              <button onClick={send} disabled={loading} className="btn-primary" style={{ justifyContent: "center", width: "100%", padding: "12px 24px", opacity: loading ? 0.5 : 1 }}>
                 {loading ? "Sending..." : `Send ${api.method} request`}
               </button>
             </div>
 
             {/* Response */}
-            <div className="lg:col-span-3">
-              <div className="code-block min-h-[400px]">
-                <div className="code-header justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="dots"><span className="bg-[#ff5f57]" /><span className="bg-[#febc2e]" /><span className="bg-[#28c840]" /></div>
-                    <span className="text-[11px] text-zinc-600 ml-1">Response</span>
-                  </div>
-                  {result && (
-                    <span className={`text-[11px] font-mono ${
-                      result.status === 200 ? "text-emerald-400" : result.status === 402 ? "text-amber-400" : "text-red-400"
-                    }`}>
-                      {result.status} {result.statusText}
-                    </span>
-                  )}
+            <div className="code-block" style={{ minHeight: 380 }}>
+              <div className="code-header" style={{ justifyContent: "space-between" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div className="code-dots"><span style={{ background: "#ff5f57" }} /><span style={{ background: "#febc2e" }} /><span style={{ background: "#28c840" }} /></div>
+                  <span style={{ fontSize: 11, color: "#555", marginLeft: 4 }}>Response</span>
                 </div>
-                <pre className="overflow-auto max-h-[480px]">
-                  {!result && !loading && (
-                    <span className="text-zinc-600">
-                      {"// Select an endpoint and click Send\n"}
-                      {"// Toggle payment to see 402 vs 200"}
-                    </span>
-                  )}
-                  {loading && <span className="text-zinc-500">Fetching...</span>}
-                  {result && (
-                    <code>
-                      <span className={result.status === 200 ? "text-emerald-400" : result.status === 402 ? "text-amber-400" : "text-red-400"}>
-                        HTTP/1.1 {result.status} {result.statusText}
-                      </span>
-                      {"\n\n"}
-                      <span className="text-zinc-400">{JSON.stringify(result.body, null, 2)}</span>
-                    </code>
-                  )}
-                </pre>
+                {result && (
+                  <span style={{ fontSize: 11, fontFamily: "monospace", color: result.status === 200 ? "#34d399" : result.status === 402 ? "#eab308" : "#ef4444" }}>
+                    {result.status} {result.statusText}
+                  </span>
+                )}
               </div>
+              <pre style={{ maxHeight: 440, overflow: "auto" }}>
+                {!result && !loading && <span style={{ color: "#444" }}>{"// Click \"Send request\" to see the response\n// Toggle payment to compare 402 vs 200"}</span>}
+                {loading && <span style={{ color: "#666" }}>Fetching...</span>}
+                {result && (
+                  <code>
+                    <span style={{ color: result.status === 200 ? "#34d399" : result.status === 402 ? "#eab308" : "#ef4444" }}>
+                      HTTP/1.1 {result.status} {result.statusText}
+                    </span>
+                    {"\n\n"}
+                    <span style={{ color: "#999" }}>{JSON.stringify(result.body, null, 2)}</span>
+                  </code>
+                )}
+              </pre>
             </div>
           </div>
         </div>
