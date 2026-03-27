@@ -1,35 +1,89 @@
+"use client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+
+const sections = [
+  { id: "install", label: "Install SDK" },
+  { id: "middleware", label: "Add Middleware" },
+  { id: "route", label: "API Route" },
+  { id: "deploy", label: "Deploy" },
+  { id: "client", label: "Client / Agent" },
+  { id: "resources", label: "Resources" },
+];
+
+function CodeDots() {
+  return <div className="code-dots"><span style={{ background: "var(--dot-red)" }} /><span style={{ background: "var(--dot-yellow)" }} /><span style={{ background: "var(--dot-green)" }} /></div>;
+}
+
+function Step({ num, id, title, children }: { num: number; id: string; title: string; children: React.ReactNode }) {
+  return (
+    <div id={id} style={{ marginBottom: 48, scrollMarginTop: 80 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+        <span className="step-num">{num}</span>
+        <h2 className="heading-md">{title}</h2>
+      </div>
+      {children}
+    </div>
+  );
+}
 
 export default function DocsPage() {
+  const [active, setActive] = useState("install");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        }
+      },
+      { rootMargin: "-80px 0px -60% 0px" }
+    );
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <Header />
-      <main style={{ paddingTop: 100, paddingBottom: 60 }}>
-        <div className="container-fluid" style={{ maxWidth: 720 }}>
-          <h1 className="text-4xl font-bold mb-4">Quick Start Guide</h1>
-          <p className="text-zinc-400 text-lg mb-12">Get your API accepting crypto payments in under 5 minutes.</p>
+      <main style={{ paddingTop: 80, paddingBottom: 60 }}>
+        <div className="container-fluid" style={{ maxWidth: 1000 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 0 }} className="lg:grid-cols-[200px_1fr] lg:gap-12">
 
-          {/* Step 1 */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="bg-blue-600 text-white text-sm font-bold w-8 h-8 flex items-center justify-center rounded-full">1</span>
-              <h2 className="text-xl font-semibold">Install the SDK</h2>
-            </div>
-            <div className="code-block">
-              <pre className="text-sm"><code>npm install @x402/next @x402/core</code></pre>
-            </div>
-          </div>
+            {/* Sidebar — desktop only */}
+            <aside className="hidden lg:block" style={{ position: "sticky", top: 80, alignSelf: "start", paddingTop: 32 }}>
+              <nav style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                {sections.map(s => (
+                  <a key={s.id} href={`#${s.id}`} className={`docs-link ${active === s.id ? "active" : ""}`}>{s.label}</a>
+                ))}
+              </nav>
+              <div className="divider" style={{ margin: "16px 0" }} />
+              <nav style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Link href="/" className="docs-link">← Home</Link>
+                <Link href="/demo" className="docs-link">→ Try Demo</Link>
+                <Link href="/pricing" className="docs-link">→ Pricing</Link>
+              </nav>
+            </aside>
 
-          {/* Step 2 */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="bg-blue-600 text-white text-sm font-bold w-8 h-8 flex items-center justify-center rounded-full">2</span>
-              <h2 className="text-xl font-semibold">Add Payment Middleware</h2>
-            </div>
-            <div className="code-block">
-              <div className="px-4 py-2 border-b border-zinc-800 text-xs text-zinc-500">middleware.ts</div>
-              <pre className="text-sm"><code>{`import { paymentMiddleware } from "@x402/next"
+            {/* Content */}
+            <div style={{ paddingTop: 32 }}>
+              <p className="label" style={{ marginBottom: 12 }}>Documentation</p>
+              <h1 className="heading-lg" style={{ marginBottom: 8 }}>Quick Start Guide</h1>
+              <p className="text-body" style={{ marginBottom: 48 }}>Get your API accepting crypto payments in under 5 minutes.</p>
+
+              <Step num={1} id="install" title="Install the SDK">
+                <div className="code-block"><pre><code>npm install @x402/next @x402/core</code></pre></div>
+              </Step>
+
+              <Step num={2} id="middleware" title="Add Payment Middleware">
+                <div className="code-block">
+                  <div className="code-header"><CodeDots /><span style={{ fontSize: 11, color: "var(--text-4)", marginLeft: 8, fontFamily: "monospace" }}>middleware.ts</span></div>
+                  <pre><code>{`import { paymentMiddleware } from "@x402/next"
 
 export default paymentMiddleware({
   "GET /api/weather": {
@@ -40,56 +94,41 @@ export default paymentMiddleware({
     }
   }
 })`}</code></pre>
-            </div>
-          </div>
+                </div>
+              </Step>
 
-          {/* Step 3 */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="bg-blue-600 text-white text-sm font-bold w-8 h-8 flex items-center justify-center rounded-full">3</span>
-              <h2 className="text-xl font-semibold">Write Your API Route</h2>
-            </div>
-            <div className="code-block">
-              <div className="px-4 py-2 border-b border-zinc-800 text-xs text-zinc-500">app/api/weather/route.ts</div>
-              <pre className="text-sm"><code>{`import { NextResponse } from "next/server"
+              <Step num={3} id="route" title="Write Your API Route">
+                <div className="code-block">
+                  <div className="code-header"><CodeDots /><span style={{ fontSize: 11, color: "var(--text-4)", marginLeft: 8, fontFamily: "monospace" }}>app/api/weather/route.ts</span></div>
+                  <pre><code>{`import { NextResponse } from "next/server"
 
 export async function GET() {
-  // Your business logic — only reached after payment
+  // Only reached after payment is verified
   return NextResponse.json({
     city: "Tokyo",
     temp: "22°C",
     condition: "Sunny"
   })
 }`}</code></pre>
-            </div>
-          </div>
+                </div>
+              </Step>
 
-          {/* Step 4 */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="bg-blue-600 text-white text-sm font-bold w-8 h-8 flex items-center justify-center rounded-full">4</span>
-              <h2 className="text-xl font-semibold">Deploy to Vercel</h2>
-            </div>
-            <div className="code-block">
-              <pre className="text-sm"><code>{`# Set environment variables
+              <Step num={4} id="deploy" title="Deploy to Vercel">
+                <div className="code-block">
+                  <pre><code>{`# Set environment variables
 vercel env add CDP_API_KEY_ID
 vercel env add CDP_API_KEY_SECRET
 vercel env add CDP_WALLET_SECRET
 
 # Deploy
 vercel deploy --prod`}</code></pre>
-            </div>
-          </div>
+                </div>
+              </Step>
 
-          {/* Step 5 - Client */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="bg-green-600 text-white text-sm font-bold w-8 h-8 flex items-center justify-center rounded-full">5</span>
-              <h2 className="text-xl font-semibold">Client / Agent Integration</h2>
-            </div>
-            <div className="code-block">
-              <div className="px-4 py-2 border-b border-zinc-800 text-xs text-zinc-500">agent.ts</div>
-              <pre className="text-sm"><code>{`import { x402Fetch } from "@x402/fetch"
+              <Step num={5} id="client" title="Client / Agent Integration">
+                <div className="code-block">
+                  <div className="code-header"><CodeDots /><span style={{ fontSize: 11, color: "var(--text-4)", marginLeft: 8, fontFamily: "monospace" }}>agent.ts</span></div>
+                  <pre><code>{`import { x402Fetch } from "@x402/fetch"
 
 // x402Fetch auto-handles 402 → pay → retry
 const weather = await x402Fetch(
@@ -98,34 +137,35 @@ const weather = await x402Fetch(
 )
 
 console.log(weather) // { city: "Tokyo", temp: "22°C" }`}</code></pre>
-            </div>
-          </div>
+                </div>
+              </Step>
 
-          {/* Resources */}
-          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
-            <h3 className="text-lg font-semibold mb-4">Resources</h3>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a href="https://docs.x402.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition">
-                  x402 Protocol Documentation &rarr;
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/coinbase/x402" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition">
-                  x402 GitHub Repository &rarr;
-                </a>
-              </li>
-              <li>
-                <a href="https://www.x402.org/ecosystem" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition">
-                  x402 Ecosystem Directory &rarr;
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/joinmouse/PayGate402" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition">
-                  PayGate402 Source Code &rarr;
-                </a>
-              </li>
-            </ul>
+              <div id="resources" style={{ scrollMarginTop: 80 }}>
+                <h2 className="heading-md" style={{ marginBottom: 16 }}>Resources</h2>
+                <div className="card">
+                  <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+                    {[
+                      { label: "x402 Protocol Documentation", href: "https://docs.x402.org" },
+                      { label: "x402 GitHub Repository", href: "https://github.com/coinbase/x402" },
+                      { label: "x402 Ecosystem Directory", href: "https://www.x402.org/ecosystem" },
+                      { label: "PayGate402 Source Code", href: "https://github.com/joinmouse/PayGate402" },
+                    ].map(r => (
+                      <li key={r.href}>
+                        <a href={r.href} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: "var(--accent-text)", textDecoration: "none" }}>
+                          {r.label} →
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Mobile nav links */}
+              <div className="lg:hidden" style={{ marginTop: 48, display: "flex", gap: 12 }}>
+                <Link href="/" className="btn-secondary" style={{ flex: 1 }}>← Home</Link>
+                <Link href="/demo" className="btn-primary" style={{ flex: 1 }}>Try Demo →</Link>
+              </div>
+            </div>
           </div>
         </div>
       </main>

@@ -17,7 +17,6 @@ export default function Features() {
       <div className="container-fluid" style={{ paddingTop: "clamp(48px, 6vh, 80px)" }}>
         <p className="label" style={{ textAlign: "center", marginBottom: 12 }}>Features</p>
         <h2 className="heading-lg" style={{ textAlign: "center", marginBottom: "clamp(40px, 5vh, 64px)" }}>Everything you need</h2>
-
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 16 }}>
           {features.map((f, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }} className="card">

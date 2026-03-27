@@ -15,14 +15,13 @@ export default function HowItWorks() {
       <div className="container-fluid" style={{ paddingTop: "clamp(48px, 6vh, 80px)" }}>
         <p className="label" style={{ textAlign: "center", marginBottom: 12 }}>How it works</p>
         <h2 className="heading-lg" style={{ textAlign: "center", marginBottom: "clamp(40px, 5vh, 64px)" }}>Four steps. Zero friction.</h2>
-
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
           {steps.map((s, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className="card">
               <span className="label" style={{ display: "block", marginBottom: 16 }}>{s.num}</span>
               <h3 className="heading-md" style={{ marginBottom: 8 }}>{s.title}</h3>
               <p className="text-small" style={{ marginBottom: 16 }}>{s.desc}</p>
-              <span style={{ display: "inline-block", fontSize: 11, fontFamily: "monospace", color: "#6366f1", background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.15)", padding: "4px 10px", borderRadius: 6 }}>{s.tag}</span>
+              <span className="tag">{s.tag}</span>
             </motion.div>
           ))}
         </div>

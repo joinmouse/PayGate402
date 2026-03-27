@@ -1,24 +1,27 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "PayGate402 — The x402 Payment Gateway for AI Agents",
-  description: "Accept USDC micropayments for your APIs with one line of code. Built on the x402 protocol for AI agents and developers.",
-  openGraph: {
-    title: "PayGate402 — Pay Any API with Crypto",
-    description: "The x402 payment gateway for AI agents. Accept USDC micropayments on Base.",
-    type: "website",
-  },
+  description: "Accept USDC micropayments for your APIs with one line of code. Built on the x402 protocol.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Prevent FOUC: apply saved theme before paint */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          try {
+            const t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+            document.documentElement.classList.toggle('dark', t === 'dark');
+          } catch(e) {}
+        ` }} />
+      </head>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

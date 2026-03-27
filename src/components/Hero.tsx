@@ -9,31 +9,26 @@ export default function Hero() {
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="label" style={{ marginBottom: 20 }}>
           Built on the x402 open protocol
         </motion.p>
-
         <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="heading-xl" style={{ marginBottom: 20, maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
-          Pay any API with crypto.{" "}
-          <span className="gradient-text">One line of code.</span>
+          Pay any API with crypto.{" "}<span className="gradient-text">One line of code.</span>
         </motion.h1>
-
         <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-body" style={{ maxWidth: 480, margin: "0 auto 36px", fontSize: "1.0625rem" }}>
           Accept USDC micropayments for your APIs on Base. No accounts, no KYC — AI agents pay autonomously.
         </motion.p>
-
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: "clamp(48px, 6vh, 80px)" }}>
           <Link href="/demo" className="btn-primary">Try Demo</Link>
           <Link href="/docs" className="btn-secondary">Documentation</Link>
         </motion.div>
-
         <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} style={{ maxWidth: 680, margin: "0 auto" }}>
           <div className="code-block">
             <div className="code-header">
-              <div className="code-dots"><span style={{ background: "#ff5f57" }} /><span style={{ background: "#febc2e" }} /><span style={{ background: "#28c840" }} /></div>
-              <span style={{ fontSize: 11, color: "#555", marginLeft: 8, fontFamily: "monospace" }}>middleware.ts</span>
+              <div className="code-dots"><span style={{ background: "var(--dot-red)" }} /><span style={{ background: "var(--dot-yellow)" }} /><span style={{ background: "var(--dot-green)" }} /></div>
+              <span style={{ fontSize: 11, color: "var(--text-3)", marginLeft: 8, fontFamily: "monospace" }}>middleware.ts</span>
             </div>
             <pre><code>
-<span style={{ color: "#c084fc" }}>import</span> <span style={{ color: "#d4d4d8" }}>{"{ paymentMiddleware }"}</span> <span style={{ color: "#c084fc" }}>from</span> <span style={{ color: "#34d399" }}>&apos;@x402/next&apos;</span>{"\n\n"}
-<span style={{ color: "#c084fc" }}>export default</span> <span style={{ color: "#67e8f9" }}>paymentMiddleware</span>{"({\n"}
-{"  "}<span style={{ color: "#34d399" }}>&apos;GET /api/weather&apos;</span>{": { price: "}<span style={{ color: "#34d399" }}>&apos;$0.001&apos;</span>{", network: "}<span style={{ color: "#34d399" }}>&apos;base&apos;</span>{" }\n}"})
+<span style={{ color: "var(--code-keyword)" }}>import</span> <span style={{ color: "var(--code-default)" }}>{"{ paymentMiddleware }"}</span> <span style={{ color: "var(--code-keyword)" }}>from</span> <span style={{ color: "var(--code-string)" }}>&apos;@x402/next&apos;</span>{"\n\n"}
+<span style={{ color: "var(--code-keyword)" }}>export default</span> <span style={{ color: "var(--code-fn)" }}>paymentMiddleware</span>{"({\n"}
+{"  "}<span style={{ color: "var(--code-string)" }}>&apos;GET /api/weather&apos;</span>{": { price: "}<span style={{ color: "var(--code-string)" }}>&apos;$0.001&apos;</span>{", network: "}<span style={{ color: "var(--code-string)" }}>&apos;base&apos;</span>{" }\n}"})
             </code></pre>
           </div>
         </motion.div>
