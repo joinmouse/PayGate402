@@ -1,85 +1,128 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Globe, Coins, ArrowRightLeft, CheckCircle } from "lucide-react";
+
 const steps = [
   {
-    num: "1",
-    icon: "&#x1F310;",
-    title: "Agent Requests API",
-    desc: "AI agent or client sends a standard HTTP request to your API endpoint.",
-    color: "blue",
+    icon: Globe,
+    title: "Request API",
+    desc: "Agent sends a standard HTTP request to your endpoint.",
+    tag: "GET /api/weather",
+    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
   },
   {
-    num: "2",
-    icon: "&#x1F4B0;",
-    title: "Server Returns 402",
-    desc: "Your API responds with HTTP 402 + payment requirements (price, token, chain).",
-    color: "amber",
+    icon: Coins,
+    title: "402 + Price",
+    desc: "Server responds with payment requirements.",
+    tag: "402 Payment Required",
+    tagColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
   },
   {
-    num: "3",
-    icon: "&#x1F4DD;",
-    title: "Agent Signs USDC",
-    desc: "Agent signs a gasless USDC transfer (EIP-3009) and retries with payment header.",
-    color: "purple",
+    icon: ArrowRightLeft,
+    title: "Sign USDC",
+    desc: "Agent signs a gasless USDC transfer via EIP-3009.",
+    tag: "X-Payment: 0xabc...",
+    tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
   },
   {
-    num: "4",
-    icon: "&#x2705;",
-    title: "Data Delivered",
-    desc: "Server verifies payment, settles on-chain via facilitator, returns HTTP 200 + data.",
-    color: "green",
+    icon: CheckCircle,
+    title: "Get Data",
+    desc: "Server verifies, settles on-chain, returns data.",
+    tag: "200 OK",
+    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 px-6">
+    <section id="how-it-works" className="py-28 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
-          <p className="text-zinc-400 text-lg max-w-xl mx-auto">
-            Four steps. No accounts. No API keys. Just HTTP + crypto.
-          </p>
+        <div className="text-center mb-20">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-indigo-400 text-sm font-medium uppercase tracking-widest mb-3"
+          >
+            How It Works
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-[2.75rem] font-bold tracking-tight"
+          >
+            Four Steps. Zero Friction.
+          </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {steps.map((step, i) => (
-            <div key={i} className="relative">
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="relative group"
+            >
+              {/* Connector line */}
               {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-zinc-700 to-transparent z-0" />
+                <div className="hidden md:block absolute top-10 left-[calc(100%+2px)] w-[calc(100%-20px)] h-px">
+                  <div className="h-full bg-gradient-to-r from-zinc-700/50 to-transparent" />
+                </div>
               )}
-              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 relative z-10 hover:border-zinc-600 transition">
-                <div className="text-3xl mb-4" dangerouslySetInnerHTML={{ __html: step.icon }} />
-                <div className="text-xs font-mono text-zinc-500 mb-2">STEP {step.num}</div>
-                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{step.desc}</p>
+
+              <div className="bg-[#111113] border border-[#1e1e22] rounded-2xl p-6 h-full hover:border-[#2a2a30] transition-all hover:bg-[#141416] group-hover:shadow-lg group-hover:shadow-indigo-500/[0.03]">
+                <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center mb-5">
+                  <step.icon className="w-5 h-5 text-zinc-400 group-hover:text-indigo-400 transition-colors" />
+                </div>
+                <div className="text-[11px] font-mono text-zinc-600 mb-2">STEP {i + 1}</div>
+                <h3 className="text-base font-semibold mb-2">{step.title}</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed mb-4">{step.desc}</p>
+                <span className={`inline-block text-[11px] font-mono px-2.5 py-1 rounded-md border ${step.tagColor}`}>
+                  {step.tag}
+                </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* HTTP flow visualization */}
-        <div className="mt-16 code-block max-w-3xl mx-auto">
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800">
-            <span className="text-xs text-zinc-500">HTTP Flow</span>
+        {/* HTTP flow */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 code-block max-w-3xl mx-auto glow-sm"
+        >
+          <div className="code-header">
+            <div className="dots">
+              <span className="bg-[#ff5f57]" />
+              <span className="bg-[#febc2e]" />
+              <span className="bg-[#28c840]" />
+            </div>
+            <span className="text-[11px] text-zinc-500 ml-2 font-mono">HTTP Flow</span>
           </div>
-          <pre className="text-sm font-mono">
+          <pre>
             <code>
-              <span className="text-zinc-500">{"// 1. Initial request"}</span>{"\n"}
-              <span className="text-blue-400">GET</span> /api/weather HTTP/1.1{"\n\n"}
+              <span className="text-zinc-600">{"// 1. Initial request"}</span>{"\n"}
+              <span className="text-blue-400">GET</span> <span className="text-zinc-300">/api/weather</span> <span className="text-zinc-600">HTTP/1.1</span>{"\n\n"}
 
-              <span className="text-zinc-500">{"// 2. Server responds with payment required"}</span>{"\n"}
+              <span className="text-zinc-600">{"// 2. Payment required"}</span>{"\n"}
               <span className="text-amber-400">HTTP/1.1 402 Payment Required</span>{"\n"}
-              <span className="text-zinc-400">X-Payment-Required: {"{"} price: "$0.001", token: "USDC", chain: "base" {"}"}</span>{"\n\n"}
+              <span className="text-zinc-500">X-Payment: {"{"} price: &quot;$0.001&quot;, token: &quot;USDC&quot;, chain: &quot;base&quot; {"}"}</span>{"\n\n"}
 
-              <span className="text-zinc-500">{"// 3. Agent retries with payment"}</span>{"\n"}
-              <span className="text-purple-400">GET</span> /api/weather HTTP/1.1{"\n"}
-              <span className="text-zinc-400">X-Payment: {"{"} signature: "0xabc...", amount: "1000", ... {"}"}</span>{"\n\n"}
+              <span className="text-zinc-600">{"// 3. Retry with payment"}</span>{"\n"}
+              <span className="text-purple-400">GET</span> <span className="text-zinc-300">/api/weather</span> <span className="text-zinc-600">HTTP/1.1</span>{"\n"}
+              <span className="text-zinc-500">X-Payment: {"{"} sig: &quot;0xabc...&quot;, amount: &quot;1000&quot; {"}"}</span>{"\n\n"}
 
-              <span className="text-zinc-500">{"// 4. Success!"}</span>{"\n"}
-              <span className="text-green-400">HTTP/1.1 200 OK</span>{"\n"}
-              <span className="text-zinc-400">{"{"} "city": "Tokyo", "temp": "22C", "condition": "Sunny" {"}"}</span>
+              <span className="text-zinc-600">{"// 4. Success"}</span>{"\n"}
+              <span className="text-emerald-400">HTTP/1.1 200 OK</span>{"\n"}
+              <span className="text-zinc-400">{"{"} &quot;city&quot;: &quot;Tokyo&quot;, &quot;temp&quot;: &quot;22C&quot; {"}"}</span>
             </code>
           </pre>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

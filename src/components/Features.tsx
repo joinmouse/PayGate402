@@ -1,59 +1,83 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Banknote, Fuel, Package, Zap, Bot, Globe2 } from "lucide-react";
+
 const features = [
   {
-    icon: "&#x1F4B8;",
+    icon: Banknote,
     title: "Micropayments from $0.001",
-    desc: "Charge per request, per byte, per token. Credit cards can't do this — crypto can.",
+    desc: "Charge per request, per byte, per token. Credit cards can't do this — crypto on L2 can.",
   },
   {
-    icon: "&#x26FD;",
+    icon: Fuel,
     title: "Gasless USDC Payments",
-    desc: "EIP-3009 transferWithAuthorization. Users only need USDC — no ETH for gas.",
+    desc: "EIP-3009 transferWithAuthorization. Users only need USDC — zero ETH required.",
   },
   {
-    icon: "&#x1F4E6;",
+    icon: Package,
     title: "One-Line Integration",
-    desc: "Add paymentMiddleware() to your Next.js, Express, or Hono server. Done.",
+    desc: "Add paymentMiddleware() to your Next.js, Express, or Hono server. Ship in minutes.",
   },
   {
-    icon: "&#x26A1;",
+    icon: Zap,
     title: "Base L2 Settlement",
-    desc: "Sub-cent gas fees, 2-second finality. Built on Coinbase's Base network.",
+    desc: "Sub-cent gas fees, 2-second finality. Powered by Coinbase's Base network.",
   },
   {
-    icon: "&#x1F916;",
+    icon: Bot,
     title: "Agent-Native",
     desc: "No accounts, no KYC, no API keys. AI agents pay autonomously with their wallets.",
   },
   {
-    icon: "&#x1F310;",
+    icon: Globe2,
     title: "Open Protocol",
-    desc: "Built on x402 open standard. Not locked into any vendor. Fully permissionless.",
+    desc: "Built on x402 open standard by Coinbase. Not locked into any vendor. Fully permissionless.",
   },
 ];
 
 export default function Features() {
   return (
-    <section id="features" className="py-24 px-6 bg-zinc-950/50">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Why <span className="gradient-text">PayGate402</span>
-          </h2>
-          <p className="text-zinc-400 text-lg max-w-xl mx-auto">
-            Everything you need to monetize APIs for the AI agent economy.
-          </p>
+    <section id="features" className="py-28 px-6 relative">
+      {/* Subtle bg gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-600/[0.02] to-transparent pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="text-center mb-20">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-indigo-400 text-sm font-medium uppercase tracking-widest mb-3"
+          >
+            Features
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-[2.75rem] font-bold tracking-tight"
+          >
+            Everything You Need
+          </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((f, i) => (
-            <div
+            <motion.div
               key={i}
-              className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 hover:border-zinc-600 transition group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+              className="group bg-[#111113] border border-[#1e1e22] rounded-2xl p-6 hover:border-[#2a2a30] transition-all hover:bg-[#141416]"
             >
-              <div className="text-3xl mb-4" dangerouslySetInnerHTML={{ __html: f.icon }} />
-              <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-400 transition">{f.title}</h3>
-              <p className="text-sm text-zinc-400 leading-relaxed">{f.desc}</p>
-            </div>
+              <div className="w-10 h-10 rounded-xl bg-indigo-500/[0.07] border border-indigo-500/[0.12] flex items-center justify-center mb-5 group-hover:bg-indigo-500/[0.12] transition-all">
+                <f.icon className="w-5 h-5 text-indigo-400" />
+              </div>
+              <h3 className="text-[15px] font-semibold mb-2 group-hover:text-indigo-300 transition-colors">{f.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{f.desc}</p>
+            </motion.div>
           ))}
         </div>
       </div>
