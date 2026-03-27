@@ -3,6 +3,41 @@ import Link from "next/link";
 import { useLang } from "@/lib/lang";
 import { tr } from "@/lib/i18n";
 
+const heroCode = `import { paymentMiddleware } from '@x402/next'
+
+export default paymentMiddleware({
+  'GET /api/weather': {
+    price: '$0.001',
+    network: 'base',
+  },
+})`;
+
+function CodeHighlight({ code }: { code: string }) {
+  const keywords = ['import', 'from', 'export', 'default', 'const', 'await'];
+  const lines = code.split('\n');
+
+  return (
+    <pre><code>{lines.map((line, i) => {
+      const parts: React.ReactNode[] = [];
+      // Match strings (single-quoted)
+      const regex = /('(?:[^'\\]|\\.)*')|(\b(?:import|from|export|default|const|await)\b)|(\/\/.*$)/g;
+      let last = 0;
+      let m;
+      const lineStr = line;
+      while ((m = regex.exec(lineStr)) !== null) {
+        if (m.index > last) parts.push(<span key={`t${i}-${last}`} style={{ color: "var(--code-default)" }}>{lineStr.slice(last, m.index)}</span>);
+        if (m[1]) parts.push(<span key={`s${i}-${m.index}`} style={{ color: "var(--code-string)" }}>{m[1]}</span>);
+        else if (m[2]) parts.push(<span key={`k${i}-${m.index}`} style={{ color: "var(--code-keyword)" }}>{m[2]}</span>);
+        else if (m[3]) parts.push(<span key={`c${i}-${m.index}`} style={{ color: "var(--code-comment)" }}>{m[3]}</span>);
+        last = m.index + m[0].length;
+      }
+      if (last < lineStr.length) parts.push(<span key={`e${i}`} style={{ color: "var(--code-default)" }}>{lineStr.slice(last)}</span>);
+      if (parts.length === 0) parts.push(<span key={`empty${i}`}>{" "}</span>);
+      return <span key={i}>{parts}{i < lines.length - 1 ? '\n' : ''}</span>;
+    })}</code></pre>
+  );
+}
+
 export default function Hero() {
   const { lang } = useLang();
   return (
@@ -23,13 +58,7 @@ export default function Hero() {
               <div className="code-dots"><span style={{ background: "var(--dot-red)" }} /><span style={{ background: "var(--dot-yellow)" }} /><span style={{ background: "var(--dot-green)" }} /></div>
               <span style={{ fontSize: 11, color: "var(--text-3)", marginLeft: 8, fontFamily: "monospace" }}>middleware.ts</span>
             </div>
-            <pre><code>
-<span style={{ color: "var(--code-keyword)" }}>import</span> <span style={{ color: "var(--code-default)" }}>{"{ paymentMiddleware }"}</span> <span style={{ color: "var(--code-keyword)" }}>from</span> <span style={{ color: "var(--code-string)" }}>&apos;@x402/next&apos;</span>{"\n\n"}
-<span style={{ color: "var(--code-keyword)" }}>export default</span> <span style={{ color: "var(--code-fn)" }}>paymentMiddleware</span>{"({\n"}
-{"  "}<span style={{ color: "var(--code-string)" }}>&apos;GET /api/weather&apos;</span>{": {\n"}
-{"    "}price: <span style={{ color: "var(--code-string)" }}>&apos;$0.001&apos;</span>,{"\n"}
-{"    "}network: <span style={{ color: "var(--code-string)" }}>&apos;base&apos;</span>,{"\n"}
-{"  },\n})"}</code></pre>
+            <CodeHighlight code={heroCode} />
           </div>
         </div>
       </div>
