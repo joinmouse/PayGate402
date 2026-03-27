@@ -1,39 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { withX402 } from "@x402/next";
+import { server, weatherRoute } from "@/lib/x402";
 
-// Simulates a paid weather API endpoint
-// In production, x402 middleware would handle 402 responses automatically
-export async function GET(req: NextRequest) {
-  const paymentHeader = req.headers.get("x-payment");
-
-  // If no payment header, return 402
-  if (!paymentHeader) {
-    return NextResponse.json(
-      {
-        error: "Payment Required",
-        message: "This endpoint requires payment via x402 protocol.",
-        payment: {
-          price: "$0.001",
-          token: "USDC",
-          network: "base-sepolia",
-          receiver: "0x0000000000000000000000000000000000000000",
-          description: "Weather data API - per request pricing",
-        },
-        docs: "https://docs.x402.org",
-      },
-      {
-        status: 402,
-        headers: {
-          "X-Payment-Required": JSON.stringify({
-            price: "0.001",
-            currency: "USDC",
-            network: "base-sepolia",
-          }),
-        },
-      }
-    );
-  }
-
-  // Payment received — return weather data
+// Business logic — only runs after payment is verified and settled
+const handler = async (_req: NextRequest) => {
   const cities = [
     { city: "Tokyo", temp: "22°C", condition: "Sunny", humidity: "45%", wind: "12 km/h" },
     { city: "New York", temp: "18°C", condition: "Cloudy", humidity: "62%", wind: "20 km/h" },
@@ -47,6 +17,11 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({
     ...data,
     timestamp: new Date().toISOString(),
-    payment: { status: "settled", amount: "$0.001", tx: "0xdemo..." },
+    powered_by: "PayGate402 x402",
   });
-}
+};
+
+// Wrap with x402 payment protection
+// Without valid payment: returns 402 with price info
+// With valid payment: runs handler, then settles USDC on-chain
+export const GET = withX402(handler, weatherRoute, server);

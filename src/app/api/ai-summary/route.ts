@@ -1,36 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { withX402 } from "@x402/next";
+import { server, aiSummaryRoute } from "@/lib/x402";
 
-export async function POST(req: NextRequest) {
-  const paymentHeader = req.headers.get("x-payment");
-
-  if (!paymentHeader) {
-    return NextResponse.json(
-      {
-        error: "Payment Required",
-        message: "This endpoint requires payment via x402 protocol.",
-        payment: {
-          price: "$0.01",
-          token: "USDC",
-          network: "base-sepolia",
-          receiver: "0x0000000000000000000000000000000000000000",
-          description: "AI text summarization - per request pricing",
-        },
-        docs: "https://docs.x402.org",
-      },
-      {
-        status: 402,
-        headers: {
-          "X-Payment-Required": JSON.stringify({
-            price: "0.01",
-            currency: "USDC",
-            network: "base-sepolia",
-          }),
-        },
-      }
-    );
-  }
-
-  // Simulate AI summary
+// Business logic — only runs after payment is verified
+const postHandler = async (req: NextRequest) => {
   let text = "The quick brown fox jumps over the lazy dog.";
   try {
     const body = await req.json();
@@ -50,17 +23,16 @@ export async function POST(req: NextRequest) {
     summary,
     model: "paygate402-summarizer-v1",
     timestamp: new Date().toISOString(),
-    payment: { status: "settled", amount: "$0.01", tx: "0xdemo..." },
+    powered_by: "PayGate402 x402",
   });
-}
+};
 
-export async function GET() {
-  return NextResponse.json(
-    {
-      error: "Payment Required",
-      message: "Use POST with { text: '...' } body. Payment via x402 required.",
-      payment: { price: "$0.01", token: "USDC", network: "base-sepolia" },
-    },
-    { status: 402 }
-  );
-}
+const getHandler = async (_req: NextRequest) => {
+  return NextResponse.json({
+    message: "Use POST with { text: '...' } body.",
+    price: "$0.01 USDC on Base Sepolia",
+  });
+};
+
+export const POST = withX402(postHandler, aiSummaryRoute, server);
+export const GET = withX402(getHandler, aiSummaryRoute, server);
