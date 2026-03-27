@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/theme";
+import { LangProvider } from "@/lib/lang";
 
 export const metadata: Metadata = {
   title: "PayGate402 — The x402 Payment Gateway for AI Agents",
@@ -20,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ` }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider><LangProvider>{children}</LangProvider></ThemeProvider>
       </body>
     </html>
   );

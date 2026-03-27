@@ -3,8 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
-
-type Lang = "en" | "zh";
+import { useLang, type Lang } from "@/lib/lang";
 
 const i18n = {
   en: {
@@ -194,7 +193,7 @@ const codeKeys: (keyof typeof codeSnippets)[] = ["install", "middleware", "route
 /* ── Page ── */
 export default function DocsPage() {
   const [active, setActive] = useState("overview");
-  const [lang, setLang] = useState<Lang>("en");
+  const { lang } = useLang();
   const t = i18n[lang];
   const labels = sectionLabels[lang];
 
@@ -223,18 +222,6 @@ export default function DocsPage() {
               >{labels[i]}</a>
             ))}
           </nav>
-
-          {/* Language switch */}
-          <div className="divider" style={{ margin: "20px 0" }} />
-          <p className="label" style={{ marginBottom: 8, paddingLeft: 8 }}>Language</p>
-          <div style={{ display: "flex", gap: 4, paddingLeft: 4 }}>
-            {(["en", "zh"] as const).map(l => (
-              <button key={l} onClick={() => setLang(l)}
-                style={{ padding: "4px 12px", fontSize: 12, borderRadius: 6, border: "1px solid var(--border)", background: lang === l ? "var(--tag-bg)" : "transparent", color: lang === l ? "var(--accent-text)" : "var(--text-4)", cursor: "pointer", fontWeight: lang === l ? 600 : 400 }}>
-                {l === "en" ? "EN" : "中文"}
-              </button>
-            ))}
-          </div>
         </aside>
 
         {/* ── Content ── */}
@@ -244,16 +231,6 @@ export default function DocsPage() {
             <p className="label" style={{ marginBottom: 8 }}>{t.label}</p>
             <h1 className="heading-lg" style={{ marginBottom: 12 }}>{t.title}</h1>
             <p className="text-body" style={{ marginBottom: 40 }}>{t.subtitle}</p>
-
-            {/* Mobile language toggle */}
-            <div className="lg:hidden" style={{ display: "flex", gap: 8, marginBottom: 32 }}>
-              {(["en", "zh"] as const).map(l => (
-                <button key={l} onClick={() => setLang(l)}
-                  style={{ padding: "6px 16px", fontSize: 13, borderRadius: 6, border: "1px solid var(--border)", background: lang === l ? "var(--tag-bg)" : "transparent", color: lang === l ? "var(--accent-text)" : "var(--text-4)", cursor: "pointer" }}>
-                  {l === "en" ? "English" : "中文"}
-                </button>
-              ))}
-            </div>
 
             {/* Overview */}
             <div id="overview" style={{ marginBottom: 56, scrollMarginTop: 80 }}>

@@ -1,23 +1,23 @@
 "use client";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useLang } from "@/lib/lang";
+import { tr } from "@/lib/i18n";
 
 export default function Hero() {
+  const { lang } = useLang();
   return (
     <section style={{ paddingTop: "clamp(120px, 15vh, 180px)", paddingBottom: "clamp(60px, 8vh, 100px)" }}>
       <div className="container-fluid" style={{ textAlign: "center" }}>
-        <p className="label" style={{ marginBottom: 20 }}>Built on the x402 open protocol</p>
+        <p className="label" style={{ marginBottom: 20 }}>{tr("hero.badge", lang)}</p>
         <h1 className="heading-xl" style={{ marginBottom: 20, maxWidth: 720, marginLeft: "auto", marginRight: "auto" }}>
-          Pay any API with crypto.{" "}<span className="gradient-text">One line of code.</span>
+          {tr("hero.title1", lang)}{" "}<span className="gradient-text">{tr("hero.title2", lang)}</span>
         </h1>
-        <p className="text-body" style={{ maxWidth: 480, margin: "0 auto 36px", fontSize: "1.0625rem" }}>
-          Accept USDC micropayments for your APIs on Base. No accounts, no KYC — AI agents pay autonomously.
-        </p>
+        <p className="text-body" style={{ maxWidth: 480, margin: "0 auto 36px", fontSize: "1.0625rem" }}>{tr("hero.desc", lang)}</p>
         <div style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: "clamp(48px, 6vh, 80px)" }}>
-          <Link href="/demo" className="btn-primary">Try Demo</Link>
-          <Link href="/docs" className="btn-secondary">Documentation</Link>
+          <Link href="/demo" className="btn-primary">{tr("hero.cta1", lang)}</Link>
+          <Link href="/docs" className="btn-secondary">{tr("hero.cta2", lang)}</Link>
         </div>
-        <motion.div initial={{ opacity: 1 }} animate={{ opacity: 1 }} style={{ maxWidth: 680, margin: "0 auto" }}>
+        <div style={{ maxWidth: 680, margin: "0 auto" }}>
           <div className="code-block">
             <div className="code-header">
               <div className="code-dots"><span style={{ background: "var(--dot-red)" }} /><span style={{ background: "var(--dot-yellow)" }} /><span style={{ background: "var(--dot-green)" }} /></div>
@@ -29,7 +29,7 @@ export default function Hero() {
 {"  "}<span style={{ color: "var(--code-string)" }}>&apos;GET /api/weather&apos;</span>{": { price: "}<span style={{ color: "var(--code-string)" }}>&apos;$0.001&apos;</span>{", network: "}<span style={{ color: "var(--code-string)" }}>&apos;base&apos;</span>{" }\n}"})
             </code></pre>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
