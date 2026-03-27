@@ -22,12 +22,13 @@ export default function CodeExample() {
 <span style={{ color: "var(--code-keyword)" }}>import</span> <span style={{ color: "var(--code-default)" }}>{"{ paymentMiddleware }"}</span> <span style={{ color: "var(--code-keyword)" }}>from</span> <span style={{ color: "var(--code-string)" }}>&apos;@x402/next&apos;</span>{"\n\n"}
 <span style={{ color: "var(--code-keyword)" }}>export default</span> <span style={{ color: "var(--code-fn)" }}>paymentMiddleware</span>{"({\n"}
 {"  "}<span style={{ color: "var(--code-string)" }}>&apos;GET /api/weather&apos;</span>{": {\n"}
-{"    price: "}<span style={{ color: "var(--code-string)" }}>&apos;$0.001&apos;</span>{",\n"}
-{"    network: "}<span style={{ color: "var(--code-string)" }}>&apos;base-sepolia&apos;</span>{"\n  },\n"}
+{"    "}price: <span style={{ color: "var(--code-string)" }}>&apos;$0.001&apos;</span>,{"\n"}
+{"    "}network: <span style={{ color: "var(--code-string)" }}>&apos;base-sepolia&apos;</span>,{"\n"}
+{"  },\n"}
 {"  "}<span style={{ color: "var(--code-string)" }}>&apos;POST /api/ai-summary&apos;</span>{": {\n"}
-{"    price: "}<span style={{ color: "var(--code-string)" }}>&apos;$0.01&apos;</span>{",\n"}
-{"    network: "}<span style={{ color: "var(--code-string)" }}>&apos;base-sepolia&apos;</span>{"\n  }\n}"})
-              </code></pre></div>
+{"    "}price: <span style={{ color: "var(--code-string)" }}>&apos;$0.01&apos;</span>,{"\n"}
+{"    "}network: <span style={{ color: "var(--code-string)" }}>&apos;base-sepolia&apos;</span>,{"\n"}
+{"  },\n})"}</code></pre></div>
           </div>
           <div>
             <p className="label" style={{ color: "var(--accent)", marginBottom: 12 }}>{tr("code.client", lang)}</p>
@@ -38,10 +39,10 @@ export default function CodeExample() {
 <span style={{ color: "var(--code-comment)" }}>{"// Agent wallet funded with USDC"}</span>{"\n"}
 <span style={{ color: "var(--code-keyword)" }}>const</span> wallet = <span style={{ color: "var(--code-fn)" }}>createWallet</span>(key){"\n\n"}
 <span style={{ color: "var(--code-comment)" }}>{"// Auto-handles 402 → pay → retry"}</span>{"\n"}
-<span style={{ color: "var(--code-keyword)" }}>const</span> data = <span style={{ color: "var(--code-keyword)" }}>await</span> <span style={{ color: "var(--code-fn)" }}>x402Fetch</span>({"\n"}
+<span style={{ color: "var(--code-keyword)" }}>const</span> data = <span style={{ color: "var(--code-keyword)" }}>await</span> <span style={{ color: "var(--code-fn)" }}>x402Fetch</span>({"'\n"}
 {"  "}<span style={{ color: "var(--code-string)" }}>&apos;https://api.example.com/weather&apos;</span>,{"\n"}
-{"  "}{"{ wallet }\n)"}{"\n\n"}
-console.<span style={{ color: "var(--code-fn)" }}>log</span>(data) <span style={{ color: "var(--code-comment)" }}>{"// { city: 'Tokyo' }"}</span>
+{"  "}{"{ wallet },\n)"}{"\n\n"}
+console.<span style={{ color: "var(--code-fn)" }}>log</span>(data) <span style={{ color: "var(--code-comment)" }}>{"// { city: 'Tokyo', temp: '22C' }"}</span>
               </code></pre></div>
           </div>
         </div>

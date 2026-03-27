@@ -144,12 +144,12 @@ export default paymentMiddleware({
   "GET /api/weather": {
     price: "$0.001",
     network: "base-sepolia",
-    config: { description: "Weather data API" }
+    config: { description: "Weather data API" },
   },
   "POST /api/ai-summary": {
     price: "$0.01",
-    network: "base-sepolia"
-  }
+    network: "base-sepolia",
+  },
 })`,
   route: `import { NextResponse } from "next/server"
 
@@ -158,7 +158,7 @@ export async function GET() {
   return NextResponse.json({
     city: "Tokyo",
     temp: "22°C",
-    condition: "Sunny"
+    condition: "Sunny",
   })
 }`,
   deploy: `vercel env add CDP_API_KEY_ID
@@ -173,7 +173,7 @@ const wallet = createWallet(process.env.PRIVATE_KEY)
 // Auto-handles 402 → sign USDC → retry
 const weather = await x402Fetch(
   "https://your-app.vercel.app/api/weather",
-  { wallet }
+  { wallet },
 )
 
 console.log(weather) // { city: "Tokyo", temp: "22°C" }`,
