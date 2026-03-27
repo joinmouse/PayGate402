@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 
 export default function CodeExample() {
   return (
-    <section className="py-20 md:py-28 px-6 border-t border-white/[0.04]">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-16 md:py-24 px-[6%] border-t border-white/[0.04]">
+      <div className="mx-auto max-w-[1400px]">
         <div className="text-center mb-16">
           <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-3">Integration</p>
-          <h2 className="text-2xl md:text-[2.5rem] font-bold tracking-tight">Server and client</h2>
+          <h2 className="text-[clamp(1.5rem,3vw,2.75rem)] font-bold tracking-tight">Server and client</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

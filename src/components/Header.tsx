@@ -16,7 +16,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="fixed top-0 w-full z-50 bg-[#09090b]/80 backdrop-blur-xl border-b border-white/[0.06]">
-      <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <div className="mx-auto max-w-[1400px] px-[6%] h-14 flex items-center justify-between">
         <Link href="/" className="text-sm font-semibold tracking-tight">{SITE.name}</Link>
         <nav className="hidden md:flex items-center gap-1">
           {nav.map(l => (
@@ -34,7 +34,7 @@ export default function Header() {
         </button>
       </div>
       {open && (
-        <div className="md:hidden border-t border-white/[0.06] bg-[#09090b] px-6 py-3 space-y-1">
+        <div className="md:hidden border-t border-white/[0.06] bg-[#09090b] px-[6%] py-3 space-y-1">
           {nav.map(l => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="block py-2 text-sm text-zinc-400 hover:text-white">{l.label}</Link>
           ))}

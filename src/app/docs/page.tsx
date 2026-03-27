@@ -5,8 +5,8 @@ export default function DocsPage() {
   return (
     <>
       <Header />
-      <main className="pt-24 pb-16 px-6">
-        <div className="max-w-3xl mx-auto">
+      <main className="pt-24 pb-16 px-[6%]">
+        <div className="mx-auto max-w-3xl">
           <h1 className="text-4xl font-bold mb-4">Quick Start Guide</h1>
           <p className="text-zinc-400 text-lg mb-12">Get your API accepting crypto payments in under 5 minutes.</p>
 

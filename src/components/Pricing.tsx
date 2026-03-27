@@ -23,15 +23,15 @@ const tiers = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-20 md:py-28 px-6 border-t border-white/[0.04]">
-      <div className="max-w-7xl mx-auto">
+    <section id="pricing" className="py-16 md:py-24 px-[6%] border-t border-white/[0.04]">
+      <div className="mx-auto max-w-[1400px]">
         <div className="text-center mb-16">
           <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-3">Pricing</p>
-          <h2 className="text-2xl md:text-[2.5rem] font-bold tracking-tight mb-3">Simple pricing</h2>
+          <h2 className="text-[clamp(1.5rem,3vw,2.75rem)] font-bold tracking-tight mb-3">Simple pricing</h2>
           <p className="text-[15px] text-zinc-500">Zero protocol fees. Only network gas (&lt; $0.01 on Base).</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {tiers.map((t, i) => (
             <motion.div
               key={i}

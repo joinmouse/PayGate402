@@ -13,11 +13,11 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 md:py-28 px-6 border-t border-white/[0.04]">
-      <div className="max-w-7xl mx-auto">
+    <section id="features" className="py-16 md:py-24 px-[6%] border-t border-white/[0.04]">
+      <div className="mx-auto max-w-[1400px]">
         <div className="text-center mb-16">
-          <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-3">Features</p>
-          <h2 className="text-2xl md:text-[2.5rem] font-bold tracking-tight">Everything you need</h2>
+          <p className="text-[0.6875rem] font-medium uppercase tracking-[0.15em] text-zinc-500 mb-3">Features</p>
+          <h2 className="text-[clamp(1.5rem,3vw,2.75rem)] font-bold tracking-tight">Everything you need</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -28,10 +28,10 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.04 }}
-              className="bg-[#111113] border border-white/[0.06] rounded-2xl p-6 hover:border-white/[0.1] transition-colors"
+              className="bg-[#111113] border border-white/[0.06] rounded-2xl p-5 md:p-6 hover:border-white/[0.1] transition-colors"
             >
-              <h3 className="text-[15px] font-semibold mb-2">{f.title}</h3>
-              <p className="text-[13px] text-zinc-500 leading-relaxed">{f.desc}</p>
+              <h3 className="text-[0.9375rem] font-semibold mb-2">{f.title}</h3>
+              <p className="text-[0.8125rem] text-zinc-500 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
         </div>

@@ -21,12 +21,12 @@ export default function Home() {
         <CodeExample />
         <Pricing />
 
-        <section className="py-20 md:py-28 px-6 border-t border-white/[0.04]">
+        <section className="py-16 md:py-24 px-[6%] border-t border-white/[0.04]">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="max-w-xl mx-auto text-center"
+            className="mx-auto max-w-[1400px] text-center"
           >
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Start accepting payments</h2>
             <p className="text-[15px] text-zinc-500 mb-8">Join 200+ projects in the x402 ecosystem.</p>
