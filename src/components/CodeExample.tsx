@@ -13,7 +13,7 @@ export default function CodeExample() {
         <p className="label" style={{ textAlign: "center", marginBottom: 12 }}>Integration</p>
         <h2 className="heading-lg" style={{ textAlign: "center", marginBottom: "clamp(40px, 5vh, 64px)" }}>Server and client</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))", gap: 20 }}>
-          <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <motion.div initial={{ opacity: 1 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
             <p className="label" style={{ color: "var(--success)", marginBottom: 12 }}>Server — middleware.ts</p>
             <div className="code-block"><div className="code-header"><CodeDots /></div>
               <pre><code>
@@ -28,7 +28,7 @@ export default function CodeExample() {
               </code></pre>
             </div>
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
+          <motion.div initial={{ opacity: 1 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
             <p className="label" style={{ color: "var(--accent)", marginBottom: 12 }}>Client — agent.ts</p>
             <div className="code-block"><div className="code-header"><CodeDots /></div>
               <pre><code>

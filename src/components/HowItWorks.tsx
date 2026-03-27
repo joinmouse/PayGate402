@@ -8,6 +8,12 @@ const steps = [
   { num: "04", title: "Get Data", desc: "Payment settles on-chain via facilitator. Server returns data.", tag: "200 OK" },
 ];
 
+const fadeUp = {
+  initial: { opacity: 1, y: 0 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+};
+
 export default function HowItWorks() {
   return (
     <section id="how-it-works" style={{ padding: "clamp(48px, 6vh, 80px) 0" }}>
@@ -17,7 +23,7 @@ export default function HowItWorks() {
         <h2 className="heading-lg" style={{ textAlign: "center", marginBottom: "clamp(40px, 5vh, 64px)" }}>Four steps. Zero friction.</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
           {steps.map((s, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className="card">
+            <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.06 }} className="card">
               <span className="label" style={{ display: "block", marginBottom: 16 }}>{s.num}</span>
               <h3 className="heading-md" style={{ marginBottom: 8 }}>{s.title}</h3>
               <p className="text-small" style={{ marginBottom: 16 }}>{s.desc}</p>

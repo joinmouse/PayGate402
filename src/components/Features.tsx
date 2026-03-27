@@ -10,6 +10,12 @@ const features = [
   { title: "Open standard", desc: "Built on x402 by Coinbase. Fully permissionless and vendor-neutral." },
 ];
 
+const fadeUp = {
+  initial: { opacity: 1, y: 0 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+};
+
 export default function Features() {
   return (
     <section id="features" style={{ padding: "clamp(48px, 6vh, 80px) 0" }}>
@@ -19,7 +25,7 @@ export default function Features() {
         <h2 className="heading-lg" style={{ textAlign: "center", marginBottom: "clamp(40px, 5vh, 64px)" }}>Everything you need</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 16 }}>
           {features.map((f, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }} className="card">
+            <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.04 }} className="card">
               <h3 className="heading-md" style={{ marginBottom: 8 }}>{f.title}</h3>
               <p className="text-small">{f.desc}</p>
             </motion.div>

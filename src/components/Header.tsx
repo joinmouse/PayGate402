@@ -5,8 +5,8 @@ import { useTheme } from "@/lib/theme";
 import { SITE } from "@/lib/constants";
 
 const nav = [
-  { label: "How it Works", href: "#how-it-works" },
-  { label: "Features", href: "#features" },
+  { label: "How it Works", href: "/#how-it-works" },
+  { label: "Features", href: "/#features" },
   { label: "Pricing", href: "/pricing" },
   { label: "Demo", href: "/demo" },
   { label: "Docs", href: "/docs" },

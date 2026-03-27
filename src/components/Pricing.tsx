@@ -18,7 +18,7 @@ export default function Pricing() {
         <p className="text-body" style={{ textAlign: "center", marginBottom: "clamp(40px, 5vh, 64px)" }}>Zero protocol fees. Only network gas (&lt; $0.01 on Base).</p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
           {tiers.map((t, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
+            <motion.div key={i} initial={{ opacity: 1 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
               className="card" style={t.highlight ? { borderColor: "var(--accent)" } : {}}>
               {t.highlight && <span className="label" style={{ color: "var(--accent)", display: "block", marginBottom: 12 }}>Popular</span>}
               <h3 className="heading-md" style={{ marginBottom: 4 }}>{t.name}</h3>
